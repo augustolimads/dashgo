@@ -6,8 +6,8 @@ import {
 } from '@chakra-ui/react'
 
 type Props = InputProps & {
-  type: string
   label: string
+  name: string
 }
 
 export const Input = ({ label, name, ...rest }: Props) => {

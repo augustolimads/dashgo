@@ -1,4 +1,5 @@
-import { Box, Flex, Icon, Link, Stack, Text } from '@chakra-ui/react'
+import NextLink from 'next/link'
+import { Box, Icon, Link, Stack, Text } from '@chakra-ui/react'
 import {
   RiContactsLine,
   RiDashboardLine,
@@ -14,18 +15,22 @@ export const Sidebar = () => {
           GERAL
         </Text>
         <Stack gap="4" mt="8" align="stretch">
-          <Link style={{ display: 'flex', alignItems: 'center' }}>
-            <Icon as={RiDashboardLine} fontSize="20" />
-            <Text ml="4" fontWeight="medium">
-              Dashboard
-            </Text>
-          </Link>
-          <Link style={{ display: 'flex', alignItems: 'center' }}>
-            <Icon as={RiContactsLine} fontSize="20" />
-            <Text ml="4" fontWeight="medium">
-              Usuários
-            </Text>
-          </Link>
+          <NextLink href="/dashboard" passHref>
+            <Link style={{ display: 'flex', alignItems: 'center' }}>
+              <Icon as={RiDashboardLine} fontSize="20" />
+              <Text ml="4" fontWeight="medium">
+                Dashboard
+              </Text>
+            </Link>
+          </NextLink>
+          <NextLink href="/users" passHref>
+            <Link style={{ display: 'flex', alignItems: 'center' }}>
+              <Icon as={RiContactsLine} fontSize="20" />
+              <Text ml="4" fontWeight="medium">
+                Usuários
+              </Text>
+            </Link>
+          </NextLink>
         </Stack>
       </Box>
       <Box>
