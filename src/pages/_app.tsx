@@ -11,10 +11,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <Hooks>
         <Head>
-          <title>Boilerplate next material</title>
+          <title>dashgo.</title>
           <meta
             name="description"
-            content="A simple project starter to work with typescript, React, NextJs, Redux Toolkit and Material UI"
+            content="A simple project starter to work with typescript, React, NextJs, Redux Toolkit and Chakra UI"
           />
         </Head>
         <ChakraProvider resetCSS theme={theme}>
