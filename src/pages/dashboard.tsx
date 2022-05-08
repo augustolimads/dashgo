@@ -12,9 +12,9 @@ const Dashboard: NextPage = () => {
     <DashboardWraper>
       <SimpleGrid
         flex="1"
-        gap="4"
-        minChildWidth="320px"
+        gap={['2', '4']}
         alignItems="space-between"
+        columns={[1, 1, 2]}
       >
         <DashboardItem title="Inscritos da semana">
           <Chart type="area" height="160" options={options} series={series} />

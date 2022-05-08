@@ -1,4 +1,4 @@
-import { Table } from '@chakra-ui/react'
+import { Table, TableContainer } from '@chakra-ui/react'
 import { Pagination } from '../Pagination'
 
 type Props = {
@@ -8,7 +8,9 @@ type Props = {
 export const TableWrapper = ({ children }: Props) => {
   return (
     <>
-      <Table colorScheme="whiteAlpha">{children}</Table>
+      <TableContainer maxW="calc(100vw - 7rem)">
+        <Table colorScheme="whiteAlpha">{children}</Table>
+      </TableContainer>
       <Pagination />
     </>
   )

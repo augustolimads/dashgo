@@ -5,7 +5,12 @@ export const Logo = () => {
   return (
     <Link href="/dashboard" passHref>
       <a>
-        <Text fontSize="3xl" fontWeight="bold" letterSpacing="tight" w="64">
+        <Text
+          fontSize={['xl', '2xl', '3xl']}
+          fontWeight="bold"
+          letterSpacing="tight"
+          w={['auto', '64']}
+        >
           dashgo
           <Text as="span" color="pink.500" ml="1">
             .

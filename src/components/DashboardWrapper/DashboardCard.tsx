@@ -1,4 +1,11 @@
-import { Button, Flex, Heading, Icon, Stack } from '@chakra-ui/react'
+import {
+  Button,
+  Flex,
+  Heading,
+  Icon,
+  Stack,
+  useBreakpointValue
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import { RiAddLine } from 'react-icons/ri'
 
@@ -9,6 +16,11 @@ type Props = {
 }
 
 export const DashboardCard = ({ title, children, createUrl }: Props) => {
+  const isWide = useBreakpointValue({
+    base: false,
+    lg: true
+  })
+
   if (createUrl) {
     return (
       <Stack flex="1" rounded="2xl" bg="gray.800" p="8" gap="8">
@@ -26,7 +38,7 @@ export const DashboardCard = ({ title, children, createUrl }: Props) => {
               leftIcon={<Icon as={RiAddLine} />}
               cursor="pointer"
             >
-              Criar novo
+              {isWide ? 'Criar novo' : 'Novo'}
             </Button>
           </Link>
         </Flex>

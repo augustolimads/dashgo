@@ -11,8 +11,8 @@ const EditUser: NextPage = () => {
       <DashboardCard title="Editar usuário">
         <Divider borderColor="gray.700" />
 
-        <Stack gap="8">
-          <SimpleGrid minChildWidth="248px" spacing="8" w="100%">
+        <Stack gap={['6', '8']}>
+          <SimpleGrid spacing={['6', '8']} w="100%" columns={[1, 1, 2]}>
             <Input label="Nome Completo" name="name" value="Augusto Lima" />
             <Input
               label="E-mail"
@@ -22,7 +22,7 @@ const EditUser: NextPage = () => {
             />
           </SimpleGrid>
 
-          <SimpleGrid minChildWidth="248px" spacing="8" w="100%">
+          <SimpleGrid spacing={['6', '8']} w="100%" columns={[1, 1, 2]}>
             <Input label="Senha" name="password" />
             <Input
               label="Confirmação da senha"
