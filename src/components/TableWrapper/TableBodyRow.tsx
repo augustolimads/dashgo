@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const TableBodyItem = ({ hasCheckbox, children }: Props) => {
+export const TableBodyRow = ({ hasCheckbox, children }: Props) => {
   return (
     <Tr>
       {hasCheckbox && (
