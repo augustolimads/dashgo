@@ -5,9 +5,6 @@ export const options = {
     toolbar: {
       show: false
     },
-    zoom: {
-      enable: false
-    },
     foreColor: theme.colors.gray[500]
   },
   grid: {
@@ -20,10 +17,21 @@ export const options = {
     enabled: false
   },
   xaxis: {
-    color: theme.colors.gray[600]
+    axisBorder: {
+      color: theme.colors.gray[600]
+    },
+    axisTicks: {
+      color: theme.colors.gray[600]
+    }
   },
-  axisTicks: {
-    color: theme.colors.gray[600]
+  fill: {
+    opacity: 0.3,
+    type: 'gradient',
+    gradient: {
+      shade: 'dark',
+      opacityFrom: 0.7,
+      opacityTo: 0.3
+    }
   },
   categories: [
     '2021-03-18T00:00:00.000Z',
@@ -33,16 +41,7 @@ export const options = {
     '2021-03-22T00:00:00.000Z',
     '2021-03-23T00:00:00.000Z',
     '2021-03-24T00:00:00.000Z'
-  ],
-  fill: {
-    opacity: 0.3,
-    type: 'gradient',
-    gradient: {
-      shade: 'dark',
-      opacityFrom: 0.7,
-      opacityTo: 0.3
-    }
-  }
+  ]
 }
 
 export const series = [{ name: 'series1', data: [10, 41, 35, 51, 49, 62, 69] }]
