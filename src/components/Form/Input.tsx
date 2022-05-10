@@ -1,5 +1,6 @@
 import {
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input as TextInput,
   InputProps
@@ -7,16 +8,21 @@ import {
 
 type Props = InputProps & {
   label: string
-  name: string
+  id: string
+  register: any
+  errors?: {
+    [x: string]: any
+  }
 }
 
-export const Input = ({ label, name, ...rest }: Props) => {
+export const Input = ({ label, id, errors, register, ...rest }: Props) => {
+  const errorId = errors && errors[id]
+
   return (
-    <FormControl>
-      {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+    <FormControl isInvalid={!!errorId}>
+      {!!label && <FormLabel htmlFor={id}>{label}</FormLabel>}
       <TextInput
-        name={name}
-        id={name}
+        id={id}
         focusBorderColor="pink.500"
         bg="gray.900"
         variant="filled"
@@ -24,8 +30,10 @@ export const Input = ({ label, name, ...rest }: Props) => {
           bg: 'gray.900'
         }}
         size="lg"
+        {...register(id)}
         {...rest}
       />
+      <FormErrorMessage>{errorId && errorId.message}</FormErrorMessage>
     </FormControl>
   )
 }
