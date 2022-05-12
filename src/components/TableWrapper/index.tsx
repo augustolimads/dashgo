@@ -7,11 +7,8 @@ type Props = {
 
 export const TableWrapper = ({ children }: Props) => {
   return (
-    <>
-      <TableContainer maxW="calc(100vw - 7rem)">
-        <Table colorScheme="whiteAlpha">{children}</Table>
-      </TableContainer>
-      <Pagination />
-    </>
+    <TableContainer maxW="calc(100vw - 7rem)">
+      <Table colorScheme="whiteAlpha">{children}</Table>
+    </TableContainer>
   )
 }

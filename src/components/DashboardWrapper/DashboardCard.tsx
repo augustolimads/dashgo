@@ -3,6 +3,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Spinner,
   Stack,
   useBreakpointValue
 } from '@chakra-ui/react'
@@ -11,11 +12,19 @@ import { RiAddLine } from 'react-icons/ri'
 
 type Props = {
   title: string
+  isLoading?: boolean
+  isFetching?: boolean
   children: React.ReactNode
   createUrl?: string
 }
 
-export const DashboardCard = ({ title, children, createUrl }: Props) => {
+export const DashboardCard = ({
+  title,
+  isLoading,
+  isFetching,
+  children,
+  createUrl
+}: Props) => {
   const isWide = useBreakpointValue({
     base: false,
     lg: true
@@ -27,6 +36,9 @@ export const DashboardCard = ({ title, children, createUrl }: Props) => {
         <Flex justify="space-between" align="center">
           <Heading size="lg" fontWeight="normal">
             {title}
+            {isFetching && !isLoading && (
+              <Spinner size="sm" color="gray.500" ml="2" />
+            )}
           </Heading>
 
           <Link href={createUrl || ''} passHref>
