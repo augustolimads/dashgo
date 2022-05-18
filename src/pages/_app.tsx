@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Provider } from 'react-redux'
 import { ChakraProvider } from '@chakra-ui/react'
 import { store } from 'src/store/index'
-import { Hooks } from 'src/hooks'
+import { Contexts } from 'src/contexts'
 import { theme } from 'src/styles/theme'
 import { makeServer } from 'src/services/mirage'
 import { QueryClientProvider, QueryClient } from 'react-query'
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <Hooks>
+        <Contexts>
           <Head>
             <title>dashgo.</title>
             <meta
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ChakraProvider resetCSS theme={theme}>
             <Component {...pageProps} />
           </ChakraProvider>
-        </Hooks>
+        </Contexts>
       </Provider>
       <ReactQueryDevtools />
     </QueryClientProvider>

@@ -5,7 +5,7 @@ type Hookprops = {
   children: React.ReactNode
 }
 
-export const Hooks = ({ children }: Hookprops) => (
+export const Contexts = ({ children }: Hookprops) => (
   <SidebarDrawerProvider>
     <CounterProvider>{children}</CounterProvider>
   </SidebarDrawerProvider>
