@@ -4,6 +4,7 @@ import {
   Button,
   Flex,
   Icon,
+  Link as ChakraLink,
   Spinner,
   Td,
   Text,
@@ -20,7 +21,7 @@ import { TableHead } from 'src/components/TableWrapper/TableHead'
 import { TableBody } from 'src/components/TableWrapper/TableBody'
 import { TableBodyRow } from 'src/components/TableWrapper/TableBodyRow'
 import { Pagination } from 'src/components/Pagination'
-import { useUsers } from 'src/hooks/useUsers'
+import { useUsers, handlePrefetchUser } from 'src/hooks/useUsers'
 
 const UserList: NextPage = () => {
   const [page, setPage] = useState(1)
@@ -56,7 +57,12 @@ const UserList: NextPage = () => {
                     <TableBodyRow key={user.id}>
                       <Td>
                         <Box>
-                          <Text fontWeight="bold">{user.name}</Text>
+                          <ChakraLink
+                            color="purple.400"
+                            onMouseEnter={() => handlePrefetchUser(user.id)}
+                          >
+                            <Text fontWeight="bold">{user.name}</Text>
+                          </ChakraLink>
                           <Text fontSize="sm" color="gray.300">
                             {user.email}
                           </Text>

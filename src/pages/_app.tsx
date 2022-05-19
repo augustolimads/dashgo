@@ -6,15 +6,14 @@ import { store } from 'src/store/index'
 import { Contexts } from 'src/contexts'
 import { theme } from 'src/styles/theme'
 import { makeServer } from 'src/services/mirage'
-import { QueryClientProvider, QueryClient } from 'react-query'
+import { QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+import { queryClient } from 'src/services/queryClient'
 
 function MyApp({ Component, pageProps }: AppProps) {
   if (process.env.NODE_ENV === 'development') {
     makeServer()
   }
-
-  const queryClient = new QueryClient()
 
   return (
     <QueryClientProvider client={queryClient}>
