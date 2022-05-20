@@ -9,6 +9,6 @@ export function useUsers(page: number) {
   })
 }
 
-export async function handlePrefetchUser(userId: number) {
+export async function handlePrefetchUser(userId: string) {
   await queryClient.prefetchQuery(['users', userId], () => getUser(userId))
 }

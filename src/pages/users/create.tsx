@@ -11,10 +11,13 @@ import Link from 'next/link'
 import { DashboardWraper } from 'src/components/DashboardWrapper'
 import { DashboardCard } from 'src/components/DashboardWrapper/DashboardCard'
 import { Input } from 'src/components/Form/Input'
-import { useForm } from 'react-hook-form'
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from 'react-query'
+import { api } from 'src/services/axios'
+import { queryClient } from 'src/services/queryClient'
 
 const createUserFormSchema = yup.object().shape({
   name: yup.string().required('Nome obrigatório'),
@@ -25,6 +28,23 @@ const createUserFormSchema = yup.object().shape({
 
 const CreateUser: NextPage = () => {
   const router = useRouter()
+  const createUser = useMutation(
+    async (user: FieldValues) => {
+      const response = await api.post('users', {
+        user: {
+          ...user,
+          created_at: new Date()
+        }
+      })
+      return response.data.user
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('users')
+      }
+    }
+  )
+
   const {
     register,
     handleSubmit,
@@ -34,18 +54,22 @@ const CreateUser: NextPage = () => {
     resolver: yupResolver(createUserFormSchema)
   })
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
-    router.push('/users')
-  })
+  const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+    await createUser.mutateAsync(values)
 
-  console.log(watch('email'))
+    router.push('/users')
+  }
 
   return (
     <DashboardWraper>
       <DashboardCard title="Criar usuário">
         <Divider borderColor="gray.700" />
-        <Flex as="form" onSubmit={onSubmit} flexDir="column" gap={['6', '8']}>
+        <Flex
+          as="form"
+          onSubmit={handleSubmit(onSubmit)}
+          flexDir="column"
+          gap={['6', '8']}
+        >
           <Stack gap={['6', '8']}>
             <SimpleGrid spacing={['6', '8']} w="100%" columns={[1, 1, 2]}>
               <Input

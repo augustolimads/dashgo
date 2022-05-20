@@ -1,4 +1,10 @@
-import { createServer, Factory, Model, Response } from 'miragejs'
+import {
+  ActiveModelSerializer,
+  createServer,
+  Factory,
+  Model,
+  Response
+} from 'miragejs'
 import faker from '@faker-js/faker'
 
 type User = {
@@ -9,6 +15,10 @@ type User = {
 
 export function makeServer() {
   const server = createServer({
+    serializers: {
+      application: ActiveModelSerializer
+    },
+
     models: {
       user: Model.extend<Partial<User>>({})
     },
@@ -21,7 +31,7 @@ export function makeServer() {
         email() {
           return faker.internet.email().toLowerCase()
         },
-        createdAt() {
+        created_at() {
           return faker.date.recent(10)
         }
       })
@@ -51,7 +61,8 @@ export function makeServer() {
         return new Response(200, { 'x-total-count': String(total) }, { users })
       })
 
-      this.get('/uesers/:id')
+      this.get('/users/:id')
+      this.post('/users')
 
       //reset namespace nextjs
       this.namespace = ''

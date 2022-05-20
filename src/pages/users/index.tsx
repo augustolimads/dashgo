@@ -10,7 +10,7 @@ import {
   Text,
   Th
 } from '@chakra-ui/react'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { RiPencilLine } from 'react-icons/ri'
 
@@ -22,11 +22,19 @@ import { TableBody } from 'src/components/TableWrapper/TableBody'
 import { TableBodyRow } from 'src/components/TableWrapper/TableBodyRow'
 import { Pagination } from 'src/components/Pagination'
 import { useUsers, handlePrefetchUser } from 'src/hooks/useUsers'
+import { getUsers } from 'src/services/endpoints/getUsers'
+import { User } from 'src/types/User'
 
-const UserList: NextPage = () => {
+type Props = {
+  users: User[]
+}
+
+const UserList: NextPage<Props> = ({ users }) => {
   const [page, setPage] = useState(1)
   // isFetching is more lightweight than isLoading
-  const { data, isLoading, isFetching, error } = useUsers(page)
+  const { data, isLoading, isFetching, error } = useUsers(page, {
+    initialData: users
+  })
 
   return (
     <DashboardWraper>
@@ -59,7 +67,9 @@ const UserList: NextPage = () => {
                         <Box>
                           <ChakraLink
                             color="purple.400"
-                            onMouseEnter={() => handlePrefetchUser(user.id)}
+                            onMouseEnter={() =>
+                              handlePrefetchUser(String(user.id))
+                            }
                           >
                             <Text fontWeight="bold">{user.name}</Text>
                           </ChakraLink>
@@ -68,7 +78,7 @@ const UserList: NextPage = () => {
                           </Text>
                         </Box>
                       </Td>
-                      <Td>{user.createdAt}</Td>
+                      <Td>{user.created_at}</Td>
                       <Td>
                         <Link href="/users/edit" passHref>
                           <Button
@@ -102,3 +112,13 @@ const UserList: NextPage = () => {
 }
 
 export default UserList
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { users, totalCount } = await getUsers(1)
+
+  return {
+    props: {
+      users
+    }
+  }
+}
